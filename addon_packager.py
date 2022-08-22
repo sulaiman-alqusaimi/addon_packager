@@ -160,20 +160,7 @@ class Packager(wx.Frame):
 		self.panels = {0: MainPanel(self)}
 
 		self.Show()
-	def onChoose(self, event):
-		path = wx.DirSelector("اختر مسار مجلد الإضافات", os.path.join(os.getenv("appdata"), "nvda/addons"), parent=self)
-		if not path:
-			return
-		dest = wx.DirSelector("اختر مسار الإخراج", parent=self)
 
-		if not dest:
-			wx.MessageBox("لم تقم بتحديد المجلد الذي سيتم فيه وضع الإضافات المحزمة, لذا فسيتم وضعها في مجلد باسم addons في المستندات", "تنبيه", parent=self)
-			try:
-				dest = os.path.join(os.getenv("userprofile"), "documents\\addons")
-				os.mkdir(dest)
-			except FileExistsError:
-				pass
-		Thread(target=self.package, args=(path, dest)).start()
 
 app = wx.App()
 Packager()
